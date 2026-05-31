@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { CheckCircle2, ShieldCheck, Sparkles, Star, Award, Users } from "lucide-react";
-import BeforeAfterSlider from "@/components/BeforeAfterSlider";
+import { Star, ShieldCheck, Sparkles, Award, Users } from "lucide-react";
+import HeroSlider from "@/components/HeroSlider";
+import TrustMetrics from "@/components/TrustMetrics";
+import LooksChangedFade from "@/components/LooksChangedFade";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import VideoEmbedSection from "@/components/VideoEmbedSection";
 import FAQSection from "@/components/FAQSection";
@@ -49,89 +51,55 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative">
-      {/* 1. Hero Section */}
-      <section className="relative bg-cream pt-20 pb-28 sm:pt-28 sm:pb-36 overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-gold/5 to-transparent pointer-events-none rounded-l-full"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="relative bg-white">
+      {/* 1. Immersive Luxury Hero Canvas */}
+      <HeroSlider />
+
+      {/* 2. Trust Metrics Section */}
+      <TrustMetrics />
+
+      {/* 3. Immersive Before/After Storytelling Spotlight */}
+      <section className="py-24 bg-cream overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column Text */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <span className="inline-flex items-center space-x-2 bg-navy/5 text-navy font-bold text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border border-navy/10 font-inter">
-                <Star className="w-3.5 h-3.5 fill-gold text-gold" />
-                <span>Premium Hair Restoration Clinic</span>
+            
+            {/* Left Column: Visual storytelling text */}
+            <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
+              <span className="text-xs font-bold text-gold uppercase tracking-[0.2em] font-inter">
+                Transformation Spotlight
               </span>
-              <h1 className="font-playfair text-4xl sm:text-6xl font-extrabold text-navy leading-tight">
-                Restore Your Hair. <br />
-                <span className="text-gold">Reclaim Your Confidence.</span>
-              </h1>
-              <p className="text-gray-600 text-base sm:text-lg max-w-2xl leading-relaxed mx-auto lg:mx-0">
-                Get completely natural-looking, premium non-surgical hair patch installations tailored to your scalp density and styling preferences. Invisible bases, pain-free, and styled by experts.
+              <h2 className="font-playfair text-3xl sm:text-5xl font-extrabold text-navy leading-tight">
+                Confidence Redefined, <br />
+                <span className="text-gold font-serif italic font-light">Hair Restored</span>
+              </h2>
+              <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
+                A premium transformation isn't just about cover-up; it's about matching your unique identity, facial structure, and hair density. Watch the seamless fade transition to see the natural hairline integration.
               </p>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+              
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <Link
-                  href="/contact"
-                  className="w-full sm:w-auto text-center bg-navy hover:bg-navy-light text-white font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-full shadow-lg transition duration-300 border border-gold/30"
+                  href="/gallery"
+                  className="bg-navy hover:bg-navy-light text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full border border-gold/20 shadow-md inline-block font-inter"
                 >
-                  Book Consultation
+                  Explore Showcase Gallery
                 </Link>
-                <WhatsAppCTA floating={false} className="w-full sm:w-auto justify-center" />
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-navy/10 max-w-md mx-auto lg:mx-0">
-                <div className="text-center lg:text-left">
-                  <div className="font-playfair text-2xl sm:text-3xl font-extrabold text-navy">15k+</div>
-                  <div className="text-gray-500 text-xs sm:text-sm font-semibold">Happy Clients</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="font-playfair text-2xl sm:text-3xl font-extrabold text-navy">100%</div>
-                  <div className="text-gray-500 text-xs sm:text-sm font-semibold">Natural Hair</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="font-playfair text-2xl sm:text-3xl font-extrabold text-navy">4.9★</div>
-                  <div className="text-gray-500 text-xs sm:text-sm font-semibold">Google Rating</div>
-                </div>
               </div>
             </div>
 
-            {/* Right Column Interactive Before/After */}
-            <div className="lg:col-span-5 w-full">
-              <div className="relative p-2 bg-white rounded-3xl shadow-2xl border border-gray-100">
-                <BeforeAfterSlider />
+            {/* Right Column: Timed Cross-Fade Component */}
+            <div className="lg:col-span-6 w-full">
+              <div className="p-2 bg-white rounded-3xl shadow-2xl border border-gray-150">
+                <LooksChangedFade />
               </div>
-              <p className="text-center text-gray-500 text-xs mt-4 italic font-medium">
-                Drag the slider left/right to view the premium hair patch transformation.
+              <p className="text-center text-gray-400 text-[10px] sm:text-xs mt-3 uppercase tracking-wider font-semibold">
+                Auto-transitioning before & after states
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Before/After Spotlight */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="font-playfair text-3xl sm:text-4xl font-bold text-navy mb-4">
-            See the Difference
-          </h2>
-          <p className="text-gray-600 max-w-md mx-auto mb-12">
-            Explore our real transformation results. We design custom solutions for all patterns of hair loss.
-          </p>
-          <div className="inline-flex justify-center mb-8">
-            <Link
-              href="/gallery"
-              className="font-inter text-sm font-bold text-gold hover:text-gold-dark border-b-2 border-gold pb-1 transition duration-200"
-            >
-              View Full Gallery
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Why Choose Us Section */}
+      {/* 4. Why Choose Us Section */}
       <section className="py-20 bg-navy text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -160,7 +128,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Services Overview */}
+      {/* 5. Services Overview */}
       <section className="py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -212,10 +180,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Video Transformations */}
+      {/* 6. Video Transformations */}
       <VideoEmbedSection />
 
-      {/* 6. FAQ Section */}
+      {/* 7. FAQ Section */}
       <FAQSection />
 
       {/* Floating CTA */}
