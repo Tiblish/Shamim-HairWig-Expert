@@ -5,7 +5,7 @@ import HeroSlider from "@/components/HeroSlider";
 import TrustMetrics from "@/components/TrustMetrics";
 import LooksChangedFade from "@/components/LooksChangedFade";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
-import VideoEmbedSection from "@/components/VideoEmbedSection";
+import SocialProofSection from "@/components/SocialProofSection";
 import FAQSection from "@/components/FAQSection";
 
 export default function Home() {
@@ -180,8 +180,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Video Transformations */}
-      <VideoEmbedSection />
+      {/* 6. Social Proof Section */}
+      <SocialProofSection />
 
       {/* 7. FAQ Section */}
       <FAQSection />
