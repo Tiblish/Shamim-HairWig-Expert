@@ -35,15 +35,8 @@ body {
 }
 
 .animate-marquee {
-  animation: marquee 35s linear infinite;
+  animation: marquee 28s linear infinite;
   will-change: transform;
-}
-
-/* Pause animation on hover (desktop only to prevent mobile touch glitches) */
-@media (hover: hover) {
-  .flex:hover .animate-marquee {
-    animation-play-state: paused;
-  }
 }
 
 /* Luxury Fade In Up Animation for Hero Elements */
@@ -70,4 +63,7 @@ body {
 .delay-500 { animation-delay: 500ms; }
 .delay-700 { animation-delay: 700ms; }
 
-
+/* Swiper Continuous Linear Autoplay */
+.media-swiper-container .swiper-wrapper {
+  transition-timing-function: linear !important;
+}

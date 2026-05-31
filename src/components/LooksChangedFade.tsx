@@ -58,7 +58,7 @@ export default function LooksChangedFade({
             <p className="text-gold text-xs uppercase tracking-widest font-semibold mt-2">{beforeLabel}</p>
           </div>
         )}
-        <div className="absolute bottom-6 left-6 bg-white/95 text-navy text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-md z-20 border border-gray-200">
+        <div className="absolute bottom-6 left-6 bg-navy-dark/80 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-md z-20 border border-navy-light/40">
           Before: {beforeLabel}
         </div>
       </div>

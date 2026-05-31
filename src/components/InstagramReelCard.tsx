@@ -6,6 +6,7 @@ export interface InstagramPost {
   caption: string;
   thumbnailStyle: any; // Fallback gradient styling
   tag: string;
+  onClick?: () => void;
 }
 
 export default function InstagramReelCard({
@@ -13,14 +14,25 @@ export default function InstagramReelCard({
   caption,
   thumbnailStyle,
   tag,
+  onClick,
 }: InstagramPost) {
   // Fallback styling if no custom image is supplied
   const defaultBg = {
     background: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
   };
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (onClick) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
-    <div className="group relative rounded-3xl overflow-hidden aspect-[9/16] max-w-[280px] mx-auto shadow-lg border border-gold/15 bg-navy-dark hover:shadow-2xl transition-all duration-500">
+    <div 
+      onClick={handleCardClick}
+      className="group relative rounded-3xl overflow-hidden aspect-[9/16] max-w-[280px] mx-auto shadow-lg border border-gold/15 bg-navy-dark hover:border-gold/40 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:scale-[1.03] transition-all duration-500 cursor-pointer"
+    >
       
       {/* Background/Thumbnail Layer */}
       <div
@@ -42,23 +54,25 @@ export default function InstagramReelCard({
           <Instagram className="w-5 h-5 text-white/80" />
         </div>
 
-        {/* Bottom Details & CTA Link */}
+        {/* Bottom Details & CTA button */}
         <div className="space-y-4">
           <p className="text-white text-xs leading-relaxed font-inter line-clamp-3">
             {caption}
           </p>
           
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full flex items-center justify-center space-x-1.5 border border-white/20 hover:border-gold hover:text-gold text-white text-[10px] font-bold uppercase tracking-wider py-2.5 rounded-full transition duration-300 bg-white/5 backdrop-blur-xs"
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleCardClick(e);
+            }}
+            className="w-full flex items-center justify-center space-x-1.5 border border-white/20 group-hover:border-gold group-hover:text-gold text-white text-[10px] font-bold uppercase tracking-wider py-2.5 rounded-full transition duration-300 bg-white/5 backdrop-blur-xs cursor-pointer"
           >
-            <span>View on Instagram</span>
-            <ArrowUpRight className="w-3 h-3" />
-          </a>
+            <span>Watch Transformation</span>
+            <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </button>
         </div>
       </div>
     </div>
   );
 }
+

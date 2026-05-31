@@ -50,12 +50,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative bg-white">
+    <div className="relative bg-navy-dark">
       {/* 1. Immersive Luxury Hero Canvas */}
       <HeroSlider />
 
       {/* 3. Immersive Before/After Storytelling Spotlight */}
-      <section className="py-24 bg-cream overflow-hidden">
+      <section className="py-24 bg-navy-dark border-t border-navy-light/35 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
@@ -64,18 +64,18 @@ export default function Home() {
               <span className="text-xs font-bold text-gold uppercase tracking-[0.2em] font-inter">
                 Transformation Spotlight
               </span>
-              <h2 className="font-playfair text-3xl sm:text-5xl font-extrabold text-navy leading-tight">
+              <h2 className="font-playfair text-3xl sm:text-5xl font-extrabold text-white leading-tight">
                 Confidence Redefined, <br />
                 <span className="text-gold font-serif italic font-light">Hair Restored</span>
               </h2>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
                 A premium transformation isn't just about cover-up; it's about matching your unique identity, facial structure, and hair density. Watch the seamless fade transition to see the natural hairline integration.
               </p>
               
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <Link
                   href="/gallery"
-                  className="bg-navy hover:bg-navy-light text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full border border-gold/20 shadow-md inline-block font-inter"
+                  className="border border-gold text-gold hover:bg-gold hover:text-navy text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full transition-all duration-350 shadow-md inline-block font-inter"
                 >
                   Explore Showcase Gallery
                 </Link>
@@ -84,8 +84,13 @@ export default function Home() {
 
             {/* Right Column: Timed Cross-Fade Component */}
             <div className="lg:col-span-6 w-full">
-              <div className="p-2 bg-white rounded-3xl shadow-2xl border border-gray-150">
-                <LooksChangedFade />
+              <div className="p-2 bg-navy rounded-3xl shadow-2xl border border-gold/15">
+                <LooksChangedFade
+                  beforeImage="/images/gallery/hair_before_v2.png"
+                  afterImage="/images/gallery/hair_after_v2.png"
+                  beforeLabel="Thinning Crown"
+                  afterLabel="SHS Volume System"
+                />
               </div>
               <p className="text-center text-gray-400 text-[10px] sm:text-xs mt-3 uppercase tracking-wider font-semibold">
                 Auto-transitioning before & after states
@@ -100,7 +105,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="font-playfair text-3xl sm:text-4xl font-bold text-gold mb-4">
-              Why Choose Shamim Hair Clinic?
+              Why Choose Shamim Hair Stylist?
             </h2>
             <p className="text-gray-400">
               We specialize in offering undetectable non-surgical hair systems designed to match your individual style.
@@ -125,50 +130,53 @@ export default function Home() {
       </section>
 
       {/* 5. Services Overview */}
-      <section className="py-20 bg-cream">
+      <section className="py-20 bg-navy-dark border-t border-navy-light/35">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="font-playfair text-3xl sm:text-4xl font-bold text-navy mb-4">
+          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <span className="font-inter text-xs font-bold text-gold uppercase tracking-[0.2em] bg-gold/10 px-4 py-1.5 rounded-full border border-gold/15 inline-block">
+              What We Offer
+            </span>
+            <h2 className="font-playfair text-3xl sm:text-4xl font-extrabold text-white">
               Our Premium Solutions
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-300 text-sm leading-relaxed">
               Explore our core non-surgical hair replacement configurations.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {previewServices.map((service, idx) => (
               <div
                 key={idx}
-                className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 flex flex-col justify-between"
+                className="group bg-navy rounded-3xl p-8 border border-gold/10 hover:border-gold/35 hover:-translate-y-1 hover:shadow-[0_0_28px_rgba(212,175,55,0.10)] flex flex-col justify-between transition-all duration-350 cursor-default"
               >
                 <div>
-                  <h3 className="font-playfair text-xl font-bold text-navy mb-3">
+                  <h3 className="font-playfair text-xl font-bold text-white mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                  <p className="text-gray-300 text-sm leading-relaxed mb-6">
                     {service.desc}
                   </p>
                 </div>
-                <div className="flex justify-between items-center border-t border-gray-100 pt-6">
-                  <span className="text-xs font-bold text-gold uppercase tracking-wider">
+                <div className="flex justify-between items-center border-t border-navy-light/40 pt-5">
+                  <span className="text-xs font-bold text-gold uppercase tracking-wider font-inter">
                     {service.price}
                   </span>
                   <Link
                     href="/services"
-                    className="text-xs font-bold text-navy hover:text-gold uppercase tracking-wider"
+                    className="text-[10px] font-bold text-gold/70 hover:text-gold uppercase tracking-widest font-inter transition-colors duration-200"
                   >
-                    Details &rarr;
+                    Details →
                   </Link>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-14">
             <Link
               href="/services"
-              className="bg-navy hover:bg-navy-light text-white font-bold uppercase tracking-wider text-xs px-8 py-3.5 rounded-full inline-block border border-gold/20 shadow-md"
+              className="border border-gold text-gold hover:bg-gold hover:text-navy font-bold uppercase tracking-wider text-xs px-10 py-4 rounded-full inline-block transition-all duration-300 shadow-md font-inter"
             >
               See All Services
             </Link>

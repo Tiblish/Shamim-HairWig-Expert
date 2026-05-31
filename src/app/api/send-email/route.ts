@@ -28,7 +28,7 @@ export async function POST(request: Request) {
 
     // 1. Send Alert Email to Clinic Admin
     await resend.emails.send({
-      from: "Shamim Hair Clinic <onboarding@resend.dev>", // Default free sandbox sender
+      from: "Shamim Hair Stylist <onboarding@resend.dev>", // Default free sandbox sender
       to: "info@shamimhairclinic.com",
       subject: `New Lead: ${fullName} - ${service.replace("-", " ")}`,
       html: `
@@ -70,13 +70,13 @@ export async function POST(request: Request) {
 
     // 2. Send Booking Confirmation Receipt to the Client
     await resend.emails.send({
-      from: "Shamim Hair Clinic <onboarding@resend.dev>",
+      from: "Shamim Hair Stylist <onboarding@resend.dev>",
       to: email,
       subject: "We Received Your Hair Restoration Consultation Request!",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 10px;">
           <div style="text-align: center; border-bottom: 1px solid #e5e7eb; padding-bottom: 20px; margin-bottom: 20px;">
-            <h1 style="color: #0f172a; margin: 0; font-size: 24px; font-weight: bold; font-family: 'Playfair Display', serif;">SHAMIM HAIR CLINIC</h1>
+            <h1 style="color: #0f172a; margin: 0; font-size: 24px; font-weight: bold; font-family: 'Playfair Display', serif;">SHAMIM HAIR STYLIST</h1>
             <p style="color: #d4af37; margin: 5px 0 0 0; text-transform: uppercase; font-size: 11px; letter-spacing: 2px;">Premium Hair Restoration</p>
           </div>
           <p style="color: #374151; font-size: 16px; line-height: 1.5;">Hello ${fullName},</p>
@@ -100,7 +100,7 @@ export async function POST(request: Request) {
             </a>
           </p>
           <p style="color: #9ca3af; font-size: 11px; text-align: center; border-top: 1px solid #e5e7eb; padding-top: 15px; margin-top: 25px;">
-            &copy; ${new Date().getFullYear()} Shamim Hair Clinic. All rights reserved.
+            &copy; ${new Date().getFullYear()} Shamim Hair Stylist. All rights reserved.
           </p>
         </div>
       `,

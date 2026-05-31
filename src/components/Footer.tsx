@@ -70,7 +70,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-gray-400">
               <li className="flex items-start space-x-3">
                 <MapPin className="w-4 h-4 text-gold mt-1 flex-shrink-0" />
-                <span>123 Premium Grooming Lane, Luxury District, India</span>
+                <span>12/1, Pemantle Street, Taltala, Kolkata, West Bengal 700016</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-gold flex-shrink-0" />
@@ -90,7 +90,7 @@ export default function Footer() {
 
         {/* Bottom copyright */}
         <div className="border-t border-navy-light mt-16 pt-8 text-center text-xs text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Shamim Hair Clinic. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Shamim Hair Stylist. All rights reserved.</p>
         </div>
       </div>
     </footer>

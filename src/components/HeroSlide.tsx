@@ -23,7 +23,7 @@ export default function HeroSlide({
   const defaultBackground = "linear-gradient(135deg, #0b0c10 0%, #0f172a 100%)";
 
   return (
-    <div className="relative w-full h-[90svh] sm:h-screen flex items-center overflow-hidden bg-navy-dark">
+    <div className="relative w-full h-full flex items-start pt-24 sm:items-center sm:pt-0 overflow-hidden bg-navy-dark">
       {/* Background Image Layer */}
       {backgroundImage ? (
         <div
@@ -43,7 +43,7 @@ export default function HeroSlide({
 
       {/* Left-Aligned Staggered Content Area */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
-        <div className="max-w-2xl text-left space-y-6 sm:space-y-8 pl-0 sm:pl-8">
+        <div className="max-w-2xl text-left space-y-4 sm:space-y-8 pl-0 sm:pl-8">
           
           {/* Tagline */}
           <span className="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-gold bg-gold/10 px-4 py-2 rounded-full border border-gold/20 font-inter animate-fade-in-up delay-100">
@@ -51,20 +51,20 @@ export default function HeroSlide({
           </span>
           
           {/* Headline */}
-          <h1 className="font-playfair text-4xl sm:text-7xl font-extrabold text-white leading-tight animate-fade-in-up delay-200 tracking-tight">
+          <h1 className="font-playfair text-3xl sm:text-7xl font-extrabold text-white leading-tight animate-fade-in-up delay-200 tracking-tight">
             {title}
           </h1>
           
           {/* Description */}
-          <p className="text-gray-300 text-sm sm:text-lg font-inter leading-relaxed max-w-xl animate-fade-in-up delay-300">
+          <p className="text-gray-300 text-xs sm:text-lg font-inter leading-relaxed max-w-xl animate-fade-in-up delay-300 line-clamp-2 sm:line-clamp-none hidden sm:block">
             {description}
           </p>
 
           {/* Ghost CTA Button */}
-          <div className="pt-4 animate-fade-in-up delay-400">
+          <div className="pt-2 sm:pt-4 animate-fade-in-up delay-400 hidden sm:block">
             <Link
               href={ctaLink}
-              className="inline-flex items-center space-x-2 border-2 border-gold text-gold hover:bg-gold hover:text-navy font-bold uppercase tracking-wider text-xs px-8 py-4 rounded-full transition-all duration-500 shadow-md hover:shadow-xl font-inter group"
+              className="inline-flex items-center space-x-2 border-2 border-gold text-gold hover:bg-gold hover:text-navy font-bold uppercase tracking-wider text-[10px] sm:text-xs px-6 py-3.5 sm:px-8 sm:py-4 rounded-full transition-all duration-500 shadow-md hover:shadow-xl font-inter group"
             >
               <span>{ctaText}</span>
               <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
@@ -73,5 +73,6 @@ export default function HeroSlide({
         </div>
       </div>
     </div>
+
   );
 }

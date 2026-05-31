@@ -19,11 +19,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Premium Hair Patch & Replacement Clinic | Shamim Hair Clinic",
-    template: "%s | Shamim Hair Clinic",
+    default: "Premium Hair Patch & Replacement Clinic | Shamim Hair Stylist",
+    template: "%s | Shamim Hair Stylist",
   },
-  description: "Get premium, natural hair patch, hair replacement, and hair bonding services at Shamim Hair Clinic. Book a consultation or message on WhatsApp.",
-  keywords: ["Hair Patch", "Hair Replacement", "Hair Fixing", "Hair Bonding", "Shamim Hair Clinic", "Premium Hair Studio"],
+  description: "Get premium, natural hair patch, hair replacement, and hair bonding services at Shamim Hair Stylist. Book a consultation or message on WhatsApp.",
+  keywords: ["Hair Patch", "Hair Replacement", "Hair Fixing", "Hair Bonding", "Shamim Hair Stylist", "Premium Hair Studio"],
 };
 
 export default function RootLayout({

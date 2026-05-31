@@ -104,7 +104,7 @@ export default function ContactPage() {
                   <div>
                     <h4 className="font-bold text-navy text-sm font-inter">Address</h4>
                     <p className="text-gray-500 text-sm mt-1">
-                      123 Premium Grooming Lane, Luxury District, India
+                      12/1, Pemantle Street, Taltala,<br />Kolkata, West Bengal 700016
                     </p>
                   </div>
                 </div>

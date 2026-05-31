@@ -49,15 +49,15 @@ export default function Navbar() {
       <nav
         className={`sticky top-0 z-40 transition-all duration-500 ${
           isScrolled
-            ? "bg-navy-dark/95 backdrop-blur-md shadow-lg border-b border-navy-light/40 py-2 sm:py-3"
-            : "bg-navy-dark/70 backdrop-blur-sm border-b border-transparent py-4 sm:py-5"
+            ? "bg-[#05080e]/95 backdrop-blur-md shadow-lg border-b border-gold/15 py-1.5 sm:py-2"
+            : "bg-[#05080e] border-b border-navy-light/40 py-3 sm:py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-12">
+          <div className="flex justify-between items-center py-1 sm:py-2">
             
-            {/* LEFT SIDE: Hamburger & Search Toggle */}
-            <div className="flex items-center space-x-4 flex-1 justify-start">
+            {/* LEFT SIDE: Hamburger, CTA & Search Toggle */}
+            <div className="flex items-center space-x-2 sm:space-x-4 flex-1 justify-start">
               <button
                 onClick={() => setIsDrawerOpen(true)}
                 className="text-white hover:text-gold transition duration-200 focus:outline-none"
@@ -65,6 +65,13 @@ export default function Navbar() {
               >
                 <Menu className="w-5 h-5 sm:w-6 h-6" />
               </button>
+              
+              <Link
+                href="/contact"
+                className="text-[7.5px] xs:text-[9px] sm:text-[10px] font-bold text-gold border border-gold/30 hover:border-gold px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full uppercase tracking-widest transition-all duration-300 hover:bg-gold hover:text-[#05080e] whitespace-nowrap font-inter"
+              >
+                Change Your Look
+              </Link>
               
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
@@ -78,11 +85,17 @@ export default function Navbar() {
             {/* CENTER: Custom "SHS" Luxury Logo */}
             <div className="flex flex-col items-center flex-1 justify-center">
               <Link href="/" className="flex flex-col items-center text-center">
-                <span className="font-playfair text-xl sm:text-2xl font-bold tracking-[0.2em] text-white">
+                <span className="font-playfair text-xl sm:text-2xl font-bold tracking-[0.25em] text-white leading-none">
                   S<span className="font-serif italic text-gold lowercase">h</span>S
                 </span>
-                <span className="text-[7px] sm:text-[8px] tracking-[0.4em] text-gray-400 font-bold uppercase font-inter mt-0.5">
-                  Shamim Hair Stylish
+                <span className="text-[7.5px] sm:text-[8.5px] tracking-[0.35em] text-gray-300 font-extrabold uppercase font-inter mt-1.5 leading-none">
+                  Shamim Hair Stylist
+                </span>
+                <span className="text-[6.5px] sm:text-[7.5px] tracking-[0.2em] text-gold/90 font-bold uppercase font-inter mt-1 leading-none">
+                  Non-Surgical Hair Restoration
+                </span>
+                <span className="text-[5px] sm:text-[6px] tracking-[0.15em] text-gray-400 font-medium uppercase font-inter mt-1.5 leading-none hidden md:inline-block">
+                  EST. 2014 ✦ 5000+ Transformations ✦ Private Suite
                 </span>
               </Link>
             </div>
@@ -180,7 +193,7 @@ export default function Navbar() {
                   S<span className="font-serif italic text-gold lowercase">h</span>S
                 </span>
                 <span className="text-[7px] tracking-[0.4em] text-gray-400 font-bold uppercase mt-0.5">
-                  Shamim Hair Stylish
+                  Shamim Hair Stylist
                 </span>
               </div>
               <button
@@ -247,7 +260,7 @@ export default function Navbar() {
             )}
 
             <div className="space-y-2 text-xs text-gray-400 font-inter">
-              <p>📍 123 Premium Grooming Lane, Luxury District</p>
+              <p>📍 12/1, Pemantle Street, Taltala, Kolkata, WB 700016</p>
               <p>📞 +91 7903817049</p>
             </div>
             

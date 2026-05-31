@@ -2,7 +2,7 @@
 import React from "react";
 
 export default function AnnouncementBar() {
-  const tickerText = "✦ Premium Hair Patch Clinic ✦ Free Consultation ✦ WhatsApp Booking Available ✦ Natural Hairline Design ✦ Same Day Consultation ";
+  const tickerText = "✦ NATURAL HAIRLINE DESIGN ✦ NON-SURGICAL HAIR RESTORATION ✦ SAME DAY FITTING AVAILABLE ✦ PRIVATE CONSULTATION ✦ WHATSAPP BOOKING OPEN ✦ CUSTOM HAIR SYSTEM EXPERTS ✦ ";
 
   return (
     <div className="relative w-full bg-navy text-gold overflow-hidden py-2 border-b border-gold/10 select-none h-9 flex items-center">
