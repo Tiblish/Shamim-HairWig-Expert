@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { Star, ShieldCheck, Sparkles, Award, Users } from "lucide-react";
 import HeroSlider from "@/components/HeroSlider";
-import TrustMetrics from "@/components/TrustMetrics";
 import LooksChangedFade from "@/components/LooksChangedFade";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import SocialProofSection from "@/components/SocialProofSection";
@@ -54,9 +53,6 @@ export default function Home() {
     <div className="relative bg-white">
       {/* 1. Immersive Luxury Hero Canvas */}
       <HeroSlider />
-
-      {/* 2. Trust Metrics Section */}
-      <TrustMetrics />
 
       {/* 3. Immersive Before/After Storytelling Spotlight */}
       <section className="py-24 bg-cream overflow-hidden">
