@@ -38,6 +38,7 @@ export default function CinematicMediaModal({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isIframeLoadedRef = useRef(false);
 
   // Sync index when modal opens
   useEffect(() => {
@@ -54,6 +55,7 @@ export default function CinematicMediaModal({
     if (!isOpen || mediaItems.length === 0) return;
 
     setIsIframeLoaded(false);
+    isIframeLoadedRef.current = false;
     setHasErrorOrTimeout(false);
 
     // Track analytics for video start
@@ -69,7 +71,7 @@ export default function CinematicMediaModal({
     // Timeout detection for blocked embeds (e.g. adblockers blocking Instagram)
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      if (!isIframeLoaded) {
+      if (!isIframeLoadedRef.current) {
         setHasErrorOrTimeout(true);
       }
     }, 4500); // 4.5 seconds timeout threshold
@@ -313,7 +315,9 @@ export default function CinematicMediaModal({
             title={activeItem.title || "Video player"}
             onLoad={() => {
               setIsIframeLoaded(true);
+              isIframeLoadedRef.current = true;
               setHasErrorOrTimeout(false);
+              if (timeoutRef.current) clearTimeout(timeoutRef.current);
             }}
             className={`w-full h-full border-0 transition-opacity duration-500 z-10 ${
               isIframeLoaded && !hasErrorOrTimeout ? "opacity-100" : "opacity-0"

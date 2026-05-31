@@ -78,6 +78,7 @@ export default function HeroSlider() {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
 
   const handleCardClick = (item: typeof mediaItems[0], index: number, isActive: boolean, e: React.MouseEvent) => {
     if (!isActive) {
@@ -145,13 +146,20 @@ export default function HeroSlider() {
 
             {/* Horizontal Swiper Carousel Track */}
             {/* Desktop peeking: 2.4 visible. Mobile peeking: 1.4 visible */}
-            <div className="w-full relative select-none">
+            <div 
+              className="w-full relative select-none"
+              onMouseEnter={() => swiperInstance?.autoplay?.stop()}
+              onMouseLeave={() => swiperInstance?.autoplay?.start()}
+              onTouchStart={() => swiperInstance?.autoplay?.stop()}
+              onTouchEnd={() => swiperInstance?.autoplay?.start()}
+            >
               <Swiper
+                onSwiper={setSwiperInstance}
                 modules={[Autoplay]}
                 autoplay={{
                   delay: 0,
                   disableOnInteraction: false,
-                  pauseOnMouseEnter: false,
+                  pauseOnMouseEnter: true,
                 }}
                 speed={5000}
                 loop={true}
