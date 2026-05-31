@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { AuthContextProvider } from "@/context/AuthContext";
@@ -34,6 +35,7 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="bg-white text-charcoal min-h-screen flex flex-col font-inter antialiased">
         <AuthContextProvider>
+          <AnnouncementBar />
           <Navbar />
           <main className="flex-grow">{children}</main>
           <Footer />
