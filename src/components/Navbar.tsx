@@ -2,15 +2,17 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, PhoneCall, User as UserIcon, LogOut } from "lucide-react";
+import { Menu, X, Phone, User as UserIcon, LogOut, Search, MessageSquare } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const { user, logout } = useAuth();
 
+  // Scroll detection handler
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -23,6 +25,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Body scroll locking when mobile drawer is open
+  useEffect(() => {
+    if (isDrawerOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isDrawerOpen]);
+
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
@@ -30,177 +44,225 @@ export default function Navbar() {
     { name: "Contact", href: "/contact" },
   ];
 
-  const handleLinkClick = () => {
-    setIsOpen(false);
-  };
-
   return (
-    <nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md border-b border-gray-100 py-3"
-          : "bg-cream/90 backdrop-blur-sm border-b border-transparent py-5"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link href="/" className="flex flex-col items-start">
-            <span className="font-playfair text-xl sm:text-2xl font-bold tracking-tight text-navy">
-              SHAMIM
-            </span>
-            <span className="text-[10px] tracking-[0.25em] text-gold font-bold uppercase -mt-1 font-inter">
-              Hair Clinic
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`font-inter text-sm font-semibold tracking-wide transition-colors duration-200 ${
-                    isActive
-                      ? "text-gold border-b-2 border-gold pb-1"
-                      : "text-navy hover:text-gold"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Desktop Action Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            {user ? (
-              <>
-                <Link
-                  href="/dashboard"
-                  className="flex items-center space-x-2 text-sm font-bold text-navy hover:text-gold transition duration-200"
-                >
-                  <UserIcon className="w-4 h-4 text-gold" />
-                  <span>Dashboard</span>
-                </Link>
-                <button
-                  onClick={() => logout()}
-                  className="flex items-center space-x-1 text-sm font-bold text-red-600 hover:text-red-800 transition duration-200 pl-2 border-l border-gray-200"
-                  title="Sign Out"
-                >
-                  <LogOut className="w-4 h-4" />
-                </button>
-              </>
-            ) : (
-              <Link
-                href="/login"
-                className="text-sm font-bold text-navy hover:text-gold transition duration-200"
+    <>
+      <nav
+        className={`sticky top-0 z-40 transition-all duration-500 ${
+          isScrolled
+            ? "bg-navy-dark/95 backdrop-blur-md shadow-lg border-b border-navy-light/40 py-2 sm:py-3"
+            : "bg-navy-dark/70 backdrop-blur-sm border-b border-transparent py-4 sm:py-5"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-12">
+            
+            {/* LEFT SIDE: Hamburger & Search Toggle */}
+            <div className="flex items-center space-x-4 flex-1 justify-start">
+              <button
+                onClick={() => setIsDrawerOpen(true)}
+                className="text-white hover:text-gold transition duration-200 focus:outline-none"
+                aria-label="Open menu"
               >
-                Client Login
-              </Link>
-            )}
-
-            <a
-              href="https://wa.me/917903817049?text=Hello%20I%20want%20consultation%20regarding%20hair%20patch%20services"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 bg-navy text-white hover:bg-navy-light text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-full transition duration-300 shadow-md hover:shadow-lg border border-gold/30"
-            >
-              <PhoneCall className="w-3.5 h-3.5 text-gold" />
-              <span>WhatsApp Us</span>
-            </a>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-3">
-            {user && (
-              <Link
-                href="/dashboard"
-                className="text-navy hover:text-gold transition duration-200"
-                title="Dashboard"
+                <Menu className="w-5 h-5 sm:w-6 h-6" />
+              </button>
+              
+              <button
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                className="text-white hover:text-gold transition duration-200 focus:outline-none hidden sm:inline-block"
+                aria-label="Toggle search"
               >
-                <UserIcon className="w-5 h-5 text-gold" />
+                <Search className="w-4 h-4 sm:w-5 h-5" />
+              </button>
+            </div>
+
+            {/* CENTER: Custom "SHS" Luxury Logo */}
+            <div className="flex flex-col items-center flex-1 justify-center">
+              <Link href="/" className="flex flex-col items-center text-center">
+                <span className="font-playfair text-xl sm:text-2xl font-bold tracking-[0.2em] text-white">
+                  S<span className="font-serif italic text-gold lowercase">h</span>S
+                </span>
+                <span className="text-[7px] sm:text-[8px] tracking-[0.4em] text-gray-400 font-bold uppercase font-inter mt-0.5">
+                  Shamim Hair Stylish
+                </span>
               </Link>
-            )}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-navy hover:text-gold transition-colors duration-200 focus:outline-none"
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            </div>
+
+            {/* RIGHT SIDE: Phone, Auth & WhatsApp */}
+            <div className="flex items-center space-x-3 sm:space-x-4 flex-1 justify-end">
+              {/* Telephone */}
+              <a
+                href="tel:+917903817049"
+                className="text-white hover:text-gold transition duration-200"
+                title="Call Clinic"
+              >
+                <Phone className="w-4.5 h-4.5" />
+              </a>
+
+              {/* Profile/Auth */}
+              {user ? (
+                <div className="flex items-center space-x-2">
+                  <Link
+                    href="/dashboard"
+                    className="text-white hover:text-gold transition duration-200"
+                    title="Dashboard"
+                  >
+                    <UserIcon className="w-4.5 h-4.5 text-gold" />
+                  </Link>
+                  <button
+                    onClick={() => logout()}
+                    className="text-red-400 hover:text-red-500 transition duration-200 hidden sm:inline-block"
+                    title="Logout"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  className="text-white hover:text-gold transition duration-200"
+                  title="Client Login"
+                >
+                  <UserIcon className="w-4.5 h-4.5" />
+                </Link>
+              )}
+
+              {/* WhatsApp Mini Badge */}
+              <a
+                href="https://wa.me/917903817049?text=Hello%2C%20I%20want%20to%20book%20a%20salon%20consultation."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gold text-navy hover:bg-gold-light hover:scale-105 transition-all duration-300 rounded-full p-2 border border-white/10 hidden sm:flex"
+                title="WhatsApp Consultation"
+              >
+                <MessageSquare className="w-4 h-4 fill-current" />
+              </a>
+            </div>
+
           </div>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
+        {/* Minimal Dropdown Search Drawer (Optional UI placeholder only) */}
+        {isSearchOpen && (
+          <div className="absolute top-full left-0 w-full bg-navy-dark border-t border-navy-light/30 py-3 px-4 shadow-inner z-30 transition-all duration-300">
+            <div className="max-w-md mx-auto relative">
+              <input
+                type="text"
+                placeholder="Search services..."
+                className="w-full bg-navy border border-gold/20 rounded-full px-4 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-gold"
+              />
+              <Search className="w-4 h-4 text-gray-500 absolute right-3 top-2.5" />
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* OFF-CANVAS MOBILE DRAWER */}
+      {/* Backdrop dark overlay */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-screen opacity-100 py-4" : "max-h-0 opacity-0 pointer-events-none"
-        } bg-white border-t border-gray-100`}
+        className={`fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-300 z-50 ${
+          isDrawerOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsDrawerOpen(false)}
+      ></div>
+
+      {/* Slide-out Panel */}
+      <div
+        className={`fixed top-0 bottom-0 left-0 w-[280px] sm:w-[320px] bg-navy-dark text-white shadow-2xl z-50 transition-transform duration-500 ease-out transform ${
+          isDrawerOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
-        <div className="px-4 pt-2 pb-4 space-y-3 shadow-inner">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={handleLinkClick}
-                className={`block px-3 py-2 rounded-md text-base font-semibold ${
-                  isActive
-                    ? "bg-cream text-gold"
-                    : "text-navy hover:bg-cream hover:text-gold"
-                }`}
+        <div className="flex flex-col h-full justify-between p-6">
+          {/* Header */}
+          <div className="space-y-8">
+            <div className="flex justify-between items-center">
+              <div className="flex flex-col">
+                <span className="font-playfair text-xl font-bold tracking-[0.2em] text-white">
+                  S<span className="font-serif italic text-gold lowercase">h</span>S
+                </span>
+                <span className="text-[7px] tracking-[0.4em] text-gray-400 font-bold uppercase mt-0.5">
+                  Shamim Hair Stylish
+                </span>
+              </div>
+              <button
+                onClick={() => setIsDrawerOpen(false)}
+                className="text-gray-400 hover:text-white transition duration-200 focus:outline-none"
               >
-                {link.name}
-              </Link>
-            );
-          })}
-          <div className="border-t border-gray-100 pt-4 flex flex-col space-y-3 px-3">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="space-y-4">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsDrawerOpen(false)}
+                    className={`block font-inter text-base font-semibold tracking-wide py-2 transition ${
+                      isActive ? "text-gold pl-2 border-l-2 border-gold" : "text-gray-300 hover:text-white"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Footer details in Drawer */}
+          <div className="space-y-6 border-t border-navy-light/40 pt-6">
+            {/* Auth status link in mobile menu */}
             {user ? (
-              <>
+              <div className="space-y-3">
                 <Link
                   href="/dashboard"
-                  onClick={handleLinkClick}
-                  className="flex items-center space-x-2 text-base font-bold text-navy hover:text-gold"
+                  onClick={() => setIsDrawerOpen(false)}
+                  className="flex items-center space-x-2 text-sm font-bold text-gold"
                 >
-                  <UserIcon className="w-5 h-5 text-gold" />
+                  <UserIcon className="w-4 h-4" />
                   <span>Go to Dashboard</span>
                 </Link>
                 <button
                   onClick={() => {
                     logout();
-                    handleLinkClick();
+                    setIsDrawerOpen(false);
                   }}
-                  className="flex items-center space-x-2 text-base font-bold text-red-600 hover:text-red-800 text-left"
+                  className="flex items-center space-x-2 text-sm font-bold text-red-400 hover:text-red-500"
                 >
-                  <LogOut className="w-5 h-5" />
+                  <LogOut className="w-4 h-4" />
                   <span>Logout</span>
                 </button>
-              </>
+              </div>
             ) : (
               <Link
                 href="/login"
-                onClick={handleLinkClick}
-                className="text-base font-bold text-navy hover:text-gold block"
+                onClick={() => setIsDrawerOpen(false)}
+                className="flex items-center space-x-2 text-sm font-bold text-white hover:text-gold"
               >
-                Client Login
+                <UserIcon className="w-4.5 h-4.5 text-gold" />
+                <span>Client Login</span>
               </Link>
             )}
+
+            <div className="space-y-2 text-xs text-gray-400 font-inter">
+              <p>📍 123 Premium Grooming Lane, Luxury District</p>
+              <p>📞 +91 7903817049</p>
+            </div>
+            
             <a
-              href="https://wa.me/917903817049?text=Hello%20I%20want%20consultation%20regarding%20hair%20patch%20services"
+              href="https://wa.me/917903817049?text=Hello%2C%20I%20want%20to%20book%20a%20salon%20consultation."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center space-x-2 bg-navy text-white text-sm font-bold uppercase tracking-wider py-3 rounded-full shadow-md border border-gold/30"
+              className="flex items-center justify-center space-x-2 bg-gold hover:bg-gold-light text-navy font-bold uppercase tracking-wider text-xs py-3 rounded-full border border-white/10"
             >
-              <PhoneCall className="w-4 h-4 text-gold" />
-              <span>WhatsApp Us</span>
+              <MessageSquare className="w-4 h-4 fill-current" />
+              <span>WhatsApp Chat</span>
             </a>
           </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 }
